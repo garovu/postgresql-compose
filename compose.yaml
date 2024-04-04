@@ -1,0 +1,22 @@
+version: '3.8'
+name: postgres-compose
+services:
+  postgres:
+    container_name: postgres-container
+    image: postgres:16.2
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: supersecret
+      PGDATA: /data/postgres
+    volumes:
+       - postgres-vol:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - pgvnet
+    restart: unless-stopped
+networks:
+  pgvnet:
+    driver: bridge
+volumes:
+    postgres-vol:
