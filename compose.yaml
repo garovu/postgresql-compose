@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 name: postgres-compose
 services:
   postgres:
@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: supersecret
       PGDATA: /data/postgres
     volumes:
-       - postgres-vol:/data/postgres
+      - postgres-vol:/data/postgres
     ports:
       - "5432:5432"
     networks:
@@ -19,4 +19,4 @@ networks:
   pgvnet:
     driver: bridge
 volumes:
-    postgres-vol:
+  postgres-vol:

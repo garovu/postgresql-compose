@@ -15,8 +15,8 @@ services:
     image: prom/alertmanager:v0.27.0
     ports:
       - 9093:9093
-    volumes:
-      - ./prometheus/rule_config.yml:/etc/alertmanager/config.yml
+    # volumes:
+      # - ./prometheus/rule_config.yml:/etc/alertmanager/config.yml
   grafana:
     container_name: grafana-container
     environment:
@@ -46,7 +46,7 @@ services:
       - 3100:3100
     volumes:
       # - ./loki/rules:/etc/loki/rules
-      # - ./loki/conf:/mnt/config
+      - ./loki/loki-config.yaml:/mnt/config/loki-config.yaml
       - loki-wal:/wal
   prometheus:
     command:
@@ -67,7 +67,7 @@ services:
       - 1514:1514
       - 9080:9080
     volumes:
-      - ./loki/promtail/promtail.yaml:/etc/promtail/config.yaml
+      - ./loki/promtail-config.yaml:/etc/promtail/config.yaml
 networks:
   default:
     external: true # join to the docker cluster network
