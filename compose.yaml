@@ -1,8 +1,8 @@
 version: "3.8"
-name: postgres-compose
+name: postgresql-compose
 services:
   postgres:
-    container_name: postgres-container
+    container_name: postgresql-container
     image: postgres:16.2
     environment:
       POSTGRES_USER: admin
@@ -10,6 +10,9 @@ services:
       PGDATA: /data/postgres
     volumes:
       - postgres-vol:/data/postgres
+      - ./data/periodic_table.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./config/postgresql.conf:/data/postgres/postgresql.conf
+      - ./backup:/backup
     ports:
       - "5432:5432"
     networks:
